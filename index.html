@@ -32,6 +32,7 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
         radial-gradient(circle at 18% 0%, rgba(125,211,252,.12), transparent 32%),
+        radial-gradient(circle at 82% 20%, rgba(66,211,146,.08), transparent 28%),
         linear-gradient(180deg, #070b11 0%, #09101a 42%, #070b11 100%);
       color: var(--text);
       letter-spacing: 0;
@@ -98,13 +99,13 @@
     }
 
     .hero {
-      min-height: calc(100vh - 76px);
+      min-height: min(820px, calc(100vh - 76px));
       display: grid;
       grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
-      gap: 54px;
+      gap: 46px;
       align-items: center;
-      padding-top: 56px;
-      padding-bottom: 58px;
+      padding-top: 48px;
+      padding-bottom: 44px;
     }
 
     .eyebrow {
@@ -147,7 +148,26 @@
       font-size: 20px;
       line-height: 1.55;
       max-width: 720px;
+      margin-bottom: 16px;
+    }
+
+    .cred-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 28px;
+      color: #dcecff;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .cred-line:before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 5px rgba(66,211,146,.12);
     }
 
     .actions {
@@ -167,6 +187,10 @@
       border-radius: 8px;
       box-shadow: var(--shadow);
       overflow: hidden;
+    }
+
+    .hero .report-card {
+      transform: translateY(-4px);
     }
 
     .report-head {
@@ -230,6 +254,10 @@
       min-height: 78px;
     }
 
+    .report-metric.compact {
+      min-height: 68px;
+    }
+
     .report-metric span,
     .metric span {
       display: block;
@@ -254,6 +282,51 @@
       margin-top: 16px;
       display: grid;
       gap: 9px;
+    }
+
+    .validated-list {
+      margin-top: 18px;
+      padding: 15px;
+      border: 1px solid rgba(125,211,252,.18);
+      border-radius: 8px;
+      background: rgba(125,211,252,.045);
+    }
+
+    .validated-list strong {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .validated-list ul,
+    .compare-list,
+    .why-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .validated-list li,
+    .compare-list li,
+    .why-list li {
+      display: flex;
+      gap: 9px;
+      color: var(--muted);
+      line-height: 1.45;
+      align-items: flex-start;
+    }
+
+    .validated-list li:before,
+    .compare-list li:before,
+    .why-list li:before {
+      content: "";
+      flex: 0 0 auto;
+      width: 7px;
+      height: 7px;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: var(--blue);
     }
 
     .progress-row {
@@ -303,9 +376,94 @@
       font-size: 12px;
     }
 
+    .workflow {
+      padding-top: 28px;
+      padding-bottom: 72px;
+    }
+
+    .workflow-panel,
+    .comparison-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(13,20,32,.78);
+      box-shadow: 0 18px 70px rgba(0,0,0,.2);
+    }
+
+    .workflow-panel {
+      padding: 20px;
+    }
+
+    .workflow-panel h2 {
+      font-size: clamp(24px, 3vw, 34px);
+      margin-bottom: 20px;
+    }
+
+    .workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      position: relative;
+    }
+
+    .workflow-step {
+      position: relative;
+      min-height: 138px;
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      padding: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+    }
+
+    .workflow-step:not(:last-child):after {
+      content: "";
+      position: absolute;
+      top: 36px;
+      right: -19px;
+      width: 26px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--blue), transparent);
+      z-index: 2;
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #06111c;
+      background: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .workflow-step strong {
+      display: block;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .workflow-step span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
     section {
       padding-top: 78px;
       padding-bottom: 78px;
+      position: relative;
+    }
+
+    section + section:before {
+      content: "";
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line-soft), transparent);
     }
 
     .section-head {
@@ -325,7 +483,7 @@
 
     .metrics {
       display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(7, minmax(0, 1fr));
       gap: 12px;
     }
 
@@ -345,6 +503,11 @@
       padding: 14px 16px;
       color: var(--muted);
       background: rgba(125,211,252,.055);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .grid {
@@ -356,6 +519,22 @@
     .card {
       padding: 20px;
       min-height: 166px;
+    }
+
+    .card,
+    .metric,
+    .workflow-step,
+    .comparison-column {
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .card:hover,
+    .metric:hover,
+    .workflow-step:hover,
+    .comparison-column:hover {
+      transform: translateY(-3px);
+      border-color: rgba(125,211,252,.42);
+      background: rgba(17,27,42,.9);
     }
 
     .card p {
@@ -382,6 +561,45 @@
     .critical { background: rgba(255,95,87,.14); color: var(--red); }
     .high { background: rgba(255,159,67,.14); color: var(--orange); }
 
+    .comparison-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      overflow: hidden;
+      background: var(--line);
+    }
+
+    .comparison-column {
+      padding: 24px;
+      background: rgba(13,20,32,.96);
+      min-height: 330px;
+    }
+
+    .comparison-column.guardian {
+      background:
+        linear-gradient(180deg, rgba(125,211,252,.08), rgba(13,20,32,.98));
+    }
+
+    .comparison-kicker {
+      display: inline-flex;
+      border: 1px solid var(--line-soft);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .comparison-column h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .comparison-column.guardian .compare-list li:before { background: var(--green); }
+    .comparison-column.scanners .compare-list li:before { background: var(--orange); }
+
     .finding-card {
       position: relative;
       overflow: hidden;
@@ -396,6 +614,10 @@
     }
 
     .finding-card.critical-line:before { background: var(--red); }
+
+    .finding-card:hover {
+      box-shadow: 0 20px 60px rgba(0,0,0,.22);
+    }
 
     .impact {
       display: flex;
@@ -415,6 +637,12 @@
       grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
       gap: 16px;
       align-items: stretch;
+      border: 1px solid rgba(125,211,252,.14);
+      border-radius: 8px;
+      padding: 14px;
+      background:
+        linear-gradient(135deg, rgba(125,211,252,.055), transparent 32%),
+        rgba(6,12,20,.48);
     }
 
     .code-stack {
@@ -426,9 +654,10 @@
       position: relative;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #0a111b;
+      background: linear-gradient(180deg, #0d1623, #080f18);
       overflow: hidden;
       transition: transform .22s ease, border-color .22s ease, background .22s ease;
+      box-shadow: 0 18px 50px rgba(0,0,0,.16);
     }
 
     .code-card:hover,
@@ -445,6 +674,7 @@
       gap: 12px;
       padding: 13px 14px;
       border-bottom: 1px solid var(--line-soft);
+      background: rgba(255,255,255,.025);
     }
 
     .code-title {
@@ -487,9 +717,12 @@
     .flow-panel {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: linear-gradient(180deg, rgba(18,28,41,.95), rgba(10,16,24,.96));
+      background:
+        radial-gradient(circle at 18% 0%, rgba(125,211,252,.12), transparent 38%),
+        linear-gradient(180deg, rgba(18,28,41,.95), rgba(10,16,24,.96));
       padding: 20px;
       min-height: 100%;
+      overflow: hidden;
     }
 
     .flow-panel h3 { margin-bottom: 18px; }
@@ -497,9 +730,21 @@
     .scan-flow {
       display: grid;
       gap: 10px;
+      position: relative;
+    }
+
+    .scan-flow:before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 20px;
+      bottom: 20px;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(125,211,252,.8), rgba(245,185,66,.55), rgba(255,95,87,.55));
     }
 
     .flow-step {
+      position: relative;
       display: grid;
       grid-template-columns: 32px 1fr auto;
       gap: 12px;
@@ -507,7 +752,18 @@
       border: 1px solid var(--line-soft);
       border-radius: 8px;
       padding: 12px;
-      background: rgba(255,255,255,.025);
+      background: rgba(9,16,25,.88);
+      animation: liftStep 5.5s ease-in-out infinite;
+    }
+
+    .flow-step:nth-child(2) { animation-delay: .25s; }
+    .flow-step:nth-child(3) { animation-delay: .5s; }
+    .flow-step:nth-child(4) { animation-delay: .75s; }
+    .flow-step:nth-child(5) { animation-delay: 1s; }
+
+    @keyframes liftStep {
+      0%, 100% { border-color: var(--line-soft); transform: translateY(0); }
+      50% { border-color: rgba(125,211,252,.28); transform: translateY(-2px); }
     }
 
     .flow-index {
@@ -553,7 +809,7 @@
     .report-includes {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
+      gap: 12px;
     }
 
     .include-item {
@@ -562,8 +818,10 @@
       align-items: center;
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 13px;
-      background: rgba(13,20,32,.72);
+      padding: 14px 15px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012)),
+        rgba(13,20,32,.72);
       color: var(--text);
       font-weight: 720;
     }
@@ -586,9 +844,11 @@
     .early {
       display: grid;
       grid-template-columns: .9fr 1.1fr;
-      gap: 26px;
+      gap: 30px;
       align-items: start;
       border-top: 1px solid var(--line-soft);
+      background:
+        radial-gradient(circle at 88% 14%, rgba(125,211,252,.08), transparent 28%);
     }
 
     .early-copy p {
@@ -598,9 +858,22 @@
       max-width: 520px;
     }
 
+    .alpha-note {
+      margin-top: 18px;
+      border: 1px solid rgba(245,185,66,.22);
+      border-radius: 8px;
+      padding: 15px;
+      color: #f2d99b;
+      background: rgba(245,185,66,.07);
+      line-height: 1.55;
+      max-width: 540px;
+    }
+
     .form-panel {
-      padding: 20px;
+      padding: 22px;
       box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(18,28,41,.96), rgba(10,16,24,.98));
     }
 
     form {
@@ -648,12 +921,71 @@
     }
 
     footer {
-      padding-top: 28px;
-      padding-bottom: 32px;
+      padding-top: 34px;
+      padding-bottom: 36px;
       color: var(--muted);
       border-top: 1px solid var(--line-soft);
       font-size: 13px;
     }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .decision-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 220px;
+      padding: 22px;
+      background: rgba(13,20,32,.82);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .decision-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 70px rgba(0,0,0,.26);
+    }
+
+    .decision-card:before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: var(--blue);
+    }
+
+    .decision-card.approved-state:before { background: var(--green); }
+    .decision-card.review-state:before { background: var(--amber); }
+    .decision-card.blocked-state:before { background: var(--red); }
+
+    .decision-code {
+      display: block;
+      margin: 18px 0 14px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    .approved-state .decision-code { color: var(--green); }
+    .review-state .decision-code { color: var(--amber); }
+    .blocked-state .decision-code { color: var(--red); }
 
     @media (max-width: 980px) {
       .hero,
@@ -670,10 +1002,15 @@
       }
 
       .grid,
+      .decision-grid,
       .code-lab,
-      .report-includes {
+      .report-includes,
+      .workflow-steps,
+      .comparison-panel {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .workflow-step:not(:last-child):after { display: none; }
     }
 
     @media (max-width: 640px) {
@@ -703,8 +1040,11 @@
       .hero-strip,
       .metrics,
       .grid,
+      .decision-grid,
       .code-lab,
       .report-includes,
+      .workflow-steps,
+      .comparison-panel,
       .form-row {
         grid-template-columns: 1fr;
       }
@@ -734,6 +1074,7 @@
         <div class="eyebrow">Pre-Deployment Validation Platform</div>
         <h1>Stop Deploying Surprises</h1>
         <p class="sub">Paste a URL or upload a ZIP. Guardian launches, validates, attacks, and tells you if the release is ready.</p>
+        <div class="cred-line">Validated across 75 application cases with 5,796 attack simulations.</div>
         <div class="actions">
           <a class="button primary" href="#early-access">Request Early Access</a>
           <a class="button" href="#validation">View Validation Report</a>
@@ -757,10 +1098,21 @@
               <div class="report-metric"><span>Decision Confidence</span><strong class="medium">Medium</strong></div>
               <div class="report-metric"><span>Evidence Quality</span><strong class="high">High</strong></div>
               <div class="report-metric"><span>Gate Status</span><strong>Passed</strong></div>
+              <div class="report-metric compact"><span>Findings Grouped</span><strong>4</strong></div>
+              <div class="report-metric compact"><span>Validation Mode</span><strong>URL + ZIP</strong></div>
             </div>
             <div class="report-foot">
               <div class="progress-row"><span>Surface Coverage</span><div class="track"><div class="bar" style="width:85%"></div></div><strong>85%</strong></div>
               <div class="progress-row"><span>Workflow Coverage</span><div class="track"><div class="bar" style="width:49%"></div></div><strong>49%</strong></div>
+            </div>
+            <div class="validated-list">
+              <strong>What Guardian validated</strong>
+              <ul>
+                <li>Anonymous exploration</li>
+                <li>API checks</li>
+                <li>Auth workflow attempted</li>
+                <li>Evidence attached</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -772,23 +1124,94 @@
       </aside>
     </section>
 
+    <section class="workflow" aria-label="Guardian workflow">
+      <div class="workflow-panel">
+        <div class="eyebrow">How It Works</div>
+        <h2>From URL or ZIP to release decision</h2>
+        <div class="workflow-steps">
+          <div class="workflow-step">
+            <div class="step-number">1</div>
+            <strong>Upload ZIP / Paste URL</strong>
+            <span>Start from a staging target or project archive.</span>
+          </div>
+          <div class="workflow-step">
+            <div class="step-number">2</div>
+            <strong>Launch or connect</strong>
+            <span>Guardian reaches the running application or explains why launch is blocked.</span>
+          </div>
+          <div class="workflow-step">
+            <div class="step-number">3</div>
+            <strong>Explore workflows</strong>
+            <span>Routes, forms, APIs, auth surfaces, and user paths are mapped.</span>
+          </div>
+          <div class="workflow-step">
+            <div class="step-number">4</div>
+            <strong>Run QA + security validation</strong>
+            <span>Checks execute against behavior with evidence collection.</span>
+          </div>
+          <div class="workflow-step">
+            <div class="step-number">5</div>
+            <strong>Get release decision</strong>
+            <span>APPROVED, REVIEW FIRST, BLOCKED, or launch diagnostics.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Decision Engine</div>
+          <h2>Not another scanner. A release decision engine.</h2>
+        </div>
+        <p>Traditional scanners create queues. Guardian validates runtime behavior and turns evidence into a deployment answer.</p>
+      </div>
+      <div class="comparison-panel">
+        <article class="comparison-column scanners">
+          <span class="comparison-kicker">Traditional scanners</span>
+          <h3>Findings without release context</h3>
+          <ul class="compare-list">
+            <li>List findings</li>
+            <li>Require manual triage</li>
+            <li>Miss runtime behavior</li>
+            <li>Do not explain deployment readiness</li>
+          </ul>
+        </article>
+        <article class="comparison-column guardian">
+          <span class="comparison-kicker">SignalForge Guardian</span>
+          <h3>Evidence-backed deployment decisions</h3>
+          <ul class="compare-list">
+            <li>Launches and validates behavior</li>
+            <li>Groups risks into release decisions</li>
+            <li>Shows what was and was not tested</li>
+            <li>Provides evidence, HAR, screenshots, and repro steps</li>
+            <li>Answers &quot;Can I deploy?&quot;</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
     <section id="validation">
       <div class="section-head">
         <div>
           <div class="eyebrow">Validation Proof</div>
-          <h2>Evidence-backed release decisions</h2>
+          <h2>Evidence-backed validation</h2>
         </div>
         <p>Guardian is being validated through a campaign of modern SaaS, security, API, AI, and broken-launch application cases.</p>
       </div>
       <div class="metrics">
-        <div class="metric"><span>Application Cases Tested</span><strong>75</strong></div>
+        <div class="metric"><span>Application Cases</span><strong>75</strong></div>
         <div class="metric"><span>Completed Validations</span><strong>69</strong></div>
+        <div class="metric"><span>Environment-Blocked Diagnostics</span><strong>6</strong></div>
         <div class="metric"><span>Attack Simulations</span><strong>5,796</strong></div>
         <div class="metric"><span>Findings Generated</span><strong>135</strong></div>
         <div class="metric"><span>Observed False Positives</span><strong>0</strong></div>
         <div class="metric"><span>Observed False Negatives</span><strong>0</strong></div>
       </div>
-      <div class="proof-note">Environment-blocked cases are tracked separately with launch diagnostics.</div>
+      <div class="proof-note">
+        <span>Environment-blocked cases are tracked separately with launch diagnostics.</span>
+        <a class="button" href="#validation">View Validation Report</a>
+      </div>
     </section>
 
     <section>
@@ -801,37 +1224,37 @@
       </div>
       <div class="grid">
         <article class="card finding-card critical-line">
-          <span class="badge critical">Confirmed</span>
+          <span class="badge critical">Critical</span>
           <h3>Confirmed Authorization Failure</h3>
           <p>Normal user accessed an admin-only area.</p>
           <div class="impact"><span>Impact</span><strong class="blocked">Critical</strong></div>
         </article>
         <article class="card finding-card critical-line">
-          <span class="badge critical">Confirmed</span>
+          <span class="badge critical">Critical</span>
           <h3>Confirmed IDOR Object Access</h3>
           <p>User accessed another user's object data.</p>
           <div class="impact"><span>Impact</span><strong class="blocked">Critical</strong></div>
         </article>
         <article class="card finding-card">
-          <span class="badge high">API Security</span>
+          <span class="badge high">High</span>
           <h3>Sensitive JSON Exposure</h3>
           <p>API returned sensitive user/token fields.</p>
           <div class="impact"><span>Impact</span><strong class="high">High</strong></div>
         </article>
         <article class="card finding-card">
-          <span class="badge high">API Security</span>
+          <span class="badge high">High</span>
           <h3>Mass Assignment Risk</h3>
           <p>API accepted unauthorized role/admin mutation.</p>
           <div class="impact"><span>Impact</span><strong class="high">High</strong></div>
         </article>
         <article class="card finding-card">
-          <span class="badge high">Upload</span>
+          <span class="badge high">High</span>
           <h3>Unsafe File Upload</h3>
           <p>SVG/HTML/JS upload was accepted or served unsafely.</p>
           <div class="impact"><span>Impact</span><strong class="high">High</strong></div>
         </article>
         <article class="card finding-card">
-          <span class="badge high">AI Security</span>
+          <span class="badge high">High</span>
           <h3>AI Prompt Leakage</h3>
           <p>AI feature exposed internal instructions or unsafe tool behavior.</p>
           <div class="impact"><span>Impact</span><strong class="high">High</strong></div>
@@ -936,19 +1359,22 @@
         </div>
         <p>Guardian separates product judgment from CI policy: review can pass, confirmed high or critical risk blocks.</p>
       </div>
-      <div class="grid">
-        <article class="card">
+      <div class="decision-grid">
+        <article class="decision-card approved-state">
           <span class="badge approved">APPROVED</span>
+          <strong class="decision-code">YES</strong>
           <h3>Ready for the normal release path</h3>
           <p>No blocking release risk detected in the validated surface.</p>
         </article>
-        <article class="card">
+        <article class="decision-card review-state">
           <span class="badge review">REVIEW FIRST</span>
+          <strong class="decision-code">REVIEW</strong>
           <h3>Manual review recommended</h3>
           <p>Non-blocking findings, uncertainty, or limited workflow coverage.</p>
         </article>
-        <article class="card">
+        <article class="decision-card blocked-state">
           <span class="badge blocked">BLOCKED</span>
+          <strong class="decision-code">NO</strong>
           <h3>Do not deploy</h3>
           <p>Confirmed high or critical release risk. Do not deploy.</p>
         </article>
@@ -964,15 +1390,16 @@
         <p>A CTO gets the release decision. A developer gets the evidence needed to reproduce and fix.</p>
       </div>
       <div class="report-includes">
-        <div class="include-item"><span class="check">✓</span>Release decision</div>
-        <div class="include-item"><span class="check">✓</span>Risk level</div>
-        <div class="include-item"><span class="check">✓</span>Decision confidence</div>
-        <div class="include-item"><span class="check">✓</span>Evidence quality</div>
-        <div class="include-item"><span class="check">✓</span>What Guardian validated</div>
-        <div class="include-item"><span class="check">✓</span>What Guardian did not validate</div>
-        <div class="include-item"><span class="check">✓</span>Screenshots and HAR evidence</div>
-        <div class="include-item"><span class="check">✓</span>Reproduction steps</div>
-        <div class="include-item"><span class="check">✓</span>Recommended next actions</div>
+        <div class="include-item"><span class="check"></span>Release decision</div>
+        <div class="include-item"><span class="check"></span>Risk level</div>
+        <div class="include-item"><span class="check"></span>Decision confidence</div>
+        <div class="include-item"><span class="check"></span>Evidence quality</div>
+        <div class="include-item"><span class="check"></span>What Guardian validated</div>
+        <div class="include-item"><span class="check"></span>What Guardian did not validate</div>
+        <div class="include-item"><span class="check"></span>Screenshots and HAR evidence</div>
+        <div class="include-item"><span class="check"></span>Reproduction steps</div>
+        <div class="include-item"><span class="check"></span>Recommended next actions</div>
+        <div class="include-item"><span class="check"></span>Launch diagnostics</div>
       </div>
     </section>
 
@@ -980,7 +1407,8 @@
       <div class="early-copy">
         <div class="eyebrow">Early Access</div>
         <h2>Bring Guardian into your release process</h2>
-        <p>Private alpha is focused on validation accuracy, evidence quality, and release confidence for teams shipping fast.</p>
+        <p>Private alpha is focused on accuracy, evidence quality, and release confidence for teams shipping fast.</p>
+        <div class="alpha-note">Early access is limited to a small group of QA engineers, security engineers, CTOs, founders, and developers.</div>
       </div>
       <div class="form-panel">
         <form action="https://formspree.io/f/xwvjyakk" method="POST">
@@ -1008,14 +1436,17 @@
             <textarea name="message" placeholder="Tell us what you want Guardian to validate."></textarea>
           </label>
           <button class="button primary" type="submit">Request Early Access</button>
-          <p class="form-note">Early access requests are sent through Formspree.</p>
+          <p class="form-note">No spam. We will only contact you about Guardian alpha access.</p>
         </form>
       </div>
     </section>
   </main>
 
   <footer>
-    SignalForge Guardian validates running applications before deployment. Static scanners inspect code. Guardian validates behavior.
+    <div class="footer-inner">
+      <span class="footer-brand">SignalForge Guardian</span>
+      <span>Pre-deployment validation for AI-assisted and modern software teams.</span>
+    </div>
   </footer>
 </body>
 </html>
