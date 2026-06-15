@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SignalForge Guardian</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080c12;
+      --panel: #101722;
+      --line: #253244;
+      --text: #eef4ff;
+      --muted: #9fb0c7;
+      --green: #42d392;
+      --amber: #f5b942;
+      --red: #ff5f57;
+      --blue: #7dd3fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      letter-spacing: 0;
+    }
+    main { overflow: hidden; }
+    .nav, section { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .brand { font-weight: 800; }
+    .brand span { color: var(--blue); }
+    .nav a, .button {
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 14px;
+      background: #111a27;
+      font-weight: 700;
+    }
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 52px;
+      align-items: center;
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+    h1 {
+      font-size: clamp(48px, 8vw, 88px);
+      line-height: .94;
+      margin: 0 0 24px;
+      letter-spacing: 0;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.55;
+      max-width: 720px;
+      margin: 0 0 28px;
+    }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .primary { background: var(--text); color: #07101c; border-color: var(--text); }
+    .decision {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.28);
+    }
+    .decision small, .eyebrow { color: var(--muted); text-transform: uppercase; font-size: 12px; font-weight: 800; }
+    .decision strong { display: block; font-size: 44px; margin: 8px 0 12px; color: var(--amber); }
+    .decision ul { padding-left: 20px; color: var(--muted); line-height: 1.7; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #0d1420;
+      padding: 20px;
+      min-height: 150px;
+    }
+    .card h3 { margin: 0 0 10px; }
+    .card p { color: var(--muted); line-height: 1.5; margin: 0; }
+    section { padding-top: 76px; padding-bottom: 76px; }
+    h2 { font-size: 36px; margin: 0 0 22px; }
+    .steps { counter-reset: step; }
+    .step { position: relative; padding-top: 44px; }
+    .step:before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: #07101c;
+      font-weight: 900;
+    }
+    .badge { display: inline-block; padding: 5px 8px; border-radius: 999px; font-size: 12px; font-weight: 900; margin-bottom: 10px; }
+    .approved { background: rgba(66,211,146,.14); color: var(--green); }
+    .review { background: rgba(245,185,66,.14); color: var(--amber); }
+    .blocked { background: rgba(255,95,87,.14); color: var(--red); }
+    .apps { display: flex; gap: 10px; flex-wrap: wrap; }
+    .apps span {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 12px;
+      color: var(--muted);
+      background: #0d1420;
+      font-weight: 700;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #0d1420;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .metric strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 26px;
+      letter-spacing: 0;
+    }
+    .cta {
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .cta p { color: var(--muted); font-size: 18px; }
+    input {
+      width: min(460px, 100%);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #0b111b;
+      color: var(--text);
+      margin-right: 8px;
+    }
+    @media (max-width: 860px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      h1 { font-size: 52px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <nav class="nav">
+      <div class="brand">SignalForge <span>Guardian</span></div>
+      <a href="#early-access">Early Access</a>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Pre-Deployment Validation Platform</div>
+        <h1>Stop Deploying Surprises</h1>
+        <p class="sub">Guardian launches, tests, attacks, and validates applications before deployment, then gives your team a release decision backed by evidence.</p>
+        <div class="actions">
+          <a class="button primary" href="#early-access">Join the waitlist</a>
+          <a class="button" href="#validation">See validation set</a>
+        </div>
+      </div>
+      <aside class="decision">
+        <small>Can I deploy?</small>
+        <strong>REVIEW FIRST</strong>
+        <ul>
+          <li>No confirmed critical vulnerability in the public surface.</li>
+          <li>Authenticated workflows require deeper validation.</li>
+          <li>Evidence and reproduction steps are attached.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section>
+      <div class="eyebrow">How It Works</div>
+      <h2>URL or ZIP to release decision</h2>
+      <div class="grid steps">
+        <article class="card step"><h3>Upload ZIP or paste URL</h3><p>Guardian launches projects when needed or scans an already running staging URL.</p></article>
+        <article class="card step"><h3>Validate behavior</h3><p>It explores anonymous and authenticated flows, tests QA paths, and probes security surfaces.</p></article>
+        <article class="card step"><h3>Ship decision</h3><p>Every scan ends in APPROVED, REVIEW FIRST, BLOCKED, or LAUNCH BLOCKED.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Release Decisions</div>
+      <h2>Built for deployment gates</h2>
+      <div class="grid">
+        <article class="card"><span class="badge approved">APPROVED</span><h3>Healthy App</h3><p>No blocking release risks detected in the validated surface.</p></article>
+        <article class="card"><span class="badge review">REVIEW FIRST</span><h3>Juice Shop</h3><p>Medium review items with no confirmed high or critical finding.</p></article>
+        <article class="card"><span class="badge blocked">BLOCKED</span><h3>API Sensitive</h3><p>Confirmed sensitive JSON exposure blocks deployment under fail-on high.</p></article>
+      </div>
+    </section>
+
+    <section id="validation">
+      <div class="eyebrow">Real World Validation</div>
+      <h2>Validated across 75 application cases</h2>
+      <div class="metrics">
+        <div class="metric"><span>Applications tested</span><strong>75</strong></div>
+        <div class="metric"><span>Completed</span><strong>69</strong></div>
+        <div class="metric"><span>Environment blocked</span><strong>6</strong></div>
+        <div class="metric"><span>Decision accuracy</span><strong>100%</strong></div>
+      </div>
+      <div class="apps">
+        <span>OWASP Juice Shop</span>
+        <span>NodeGoat</span>
+        <span>DVWA</span>
+        <span>OWASP CRS Demo</span>
+        <span>SQLi Time-Based Demo</span>
+        <span>Auth Session Reuse</span>
+        <span>Mass Assignment API</span>
+        <span>File Upload Abuse</span>
+        <span>Runtime Error Demo</span>
+        <span>Express Vulnerable</span>
+        <span>AI Chat Demo</span>
+        <span>API Sensitive</span>
+        <span>Healthy App</span>
+        <span>Medusa</span>
+        <span>DVNA</span>
+        <span>DVGA</span>
+      </div>
+    </section>
+
+    <section id="early-access" class="cta">
+      <div class="eyebrow">Early Access</div>
+      <h2>Give Guardian a staging URL. Get a release decision.</h2>
+      <p>Private alpha is focused on accuracy, evidence, and deployment confidence.</p>
+      <form>
+        <input type="email" placeholder="you@company.com" aria-label="Email">
+        <button class="button primary" type="submit">Join waitlist</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
